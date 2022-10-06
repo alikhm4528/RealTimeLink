@@ -1,35 +1,31 @@
 #ifndef BUFFER_SIZE
-#define BUFFER_SIZE 1000_000
+#define BUFFER_SIZE 1000000
 #endif
 
 #include <vector>
 #include <iostream>
 #include <fstream>
 
+class NotEnoughData : public std::exception {};
+
 class ReadFromFile {
     private:
         std::vector<int>* pbuff;
         const std::string fileName;
     public:
-        ReadFromFile(std::vector<int>* pbuff) : pbuff(pbuff) {}
-        
+        ReadFromFile(std::vector<int>* pbuff, const std::string fileName) 
+            : pbuff(pbuff), fileName(fileName) {}
+
         void readDataFromFile(void) {
-            char* memblock;
-            std::streampos size;
-            std::ifstream file(fileName, std::ios::in|std::ios::binary|std::ios::ate);
+            std::ifstream file(fileName, std::ios::in|std::ios::binary);
+            char charBuff[BUFFER_SIZE];
 
-            if(file.is_open()) {
-                size = file.tellg();
-                memblock = new char [size];
-                file.seekg(0, std::ios::beg);
-                file.read(memblock, size);
-                file.close();
-
-                // cout << memblock;
-                delete[] memblock;
+            file.read(charBuff, BUFFER_SIZE);
+            if(!file) {
+                std::cout << file.gcount() << std::endl;
+                throw new NotEnoughData;
             }
-            else {
-                // cout << "Unable to open file\n";
-            }
+            for(int i = 0; i < BUFFER_SIZE; i++)
+                pbuff->push_back(charBuff[i]);
         }
 };

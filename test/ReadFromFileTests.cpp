@@ -1,18 +1,17 @@
-#define FILE_NAME "/home/alikhm/project/ReadTimeLink/'Code Base'/Database/test.bin"
+#define FILE_NAME "/home/alikhm/100G/project/RealTimeLink/Code Base/Database/test.bin"
 
 #include <gtest/gtest.h>
 #include "ReadFromFile.hpp"
 
 std::vector<int> buffer;
-const std::string FileName = "/home/alikhm/project/ReadTimeLink/'Code Base'/Database/test.bin";
 
-TEST(ReadFromFileTests, CorrectData10) {
-    int anwser[] = {1, 0, 1, 0, 1, 0, 1, 0, 1, 0};
-    ReadFromFile ReadTread(&buffer);
+TEST(ReadFromFileTests, CorrectData6) {
+    int anwser[] = {1, 0, 1, 0, 0, 1};
 
+    ReadFromFile ReadTread(&buffer, FILE_NAME);
     ReadTread.readDataFromFile();
 
-    for(int i = 0; i < 10; i++) {
+    for(int i = 0; i < 6; i++) {
         ASSERT_EQ(buffer[i], anwser[i]);
     }
 }

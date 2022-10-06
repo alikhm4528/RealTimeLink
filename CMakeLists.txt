@@ -20,6 +20,9 @@ SET(CMAKE_CXX_FLAGS_DEBUG "-ggdb")
 # source/ReadFromFile.cpp
 # main.cpp)
 
+# preprocessors
+add_compile_definitions(BUFFER_SIZE=6)
+
 add_executable(runUnitTests
 # test/SimpleTests.cpp
 test/ReadFromFileTests.cpp)
