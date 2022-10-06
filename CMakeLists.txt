@@ -21,10 +21,12 @@ SET(CMAKE_CXX_FLAGS_DEBUG "-ggdb")
 # main.cpp)
 
 # preprocessors
-add_compile_definitions(BUFFER_SIZE=6)
+# add_compile_definitions(BUFFER_SIZE=6)
+add_compile_definitions(BUFFER_SIZE=1000000)
 
 add_executable(runUnitTests
 # test/SimpleTests.cpp
-test/ReadFromFileTests.cpp)
+# test/ReadFromFileTests.cpp
+test/ReadFromFileInputDataTest.cpp)
 target_link_libraries(runUnitTests gtest gtest_main)
 add_test(runUnitTests runUnitTests)

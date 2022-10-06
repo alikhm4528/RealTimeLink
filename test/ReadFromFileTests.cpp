@@ -18,8 +18,8 @@ TEST(ReadFromFileTests, CorrectData6) {
 }
 
 TEST(ReadFromFileTests, ThrowExceptionNotEnoughData) {
+    ReadFromFile ReadTread(&buffer, EXCEPTION_FILE);
     ASSERT_THROW({
-        ReadFromFile ReadTread(&buffer, EXCEPTION_FILE);
         ReadTread.readDataFromFile();
     }, NotEnoughData);
 }
