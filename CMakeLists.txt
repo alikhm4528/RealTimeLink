@@ -8,7 +8,6 @@ include_directories(${PROJECT_SOURCE_DIR}/header/)
 include_directories(${PROJECT_SOURCE_DIR}/source/)
 
 # GTest
-# add_subdirectory(source)
 enable_testing()
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
@@ -27,6 +26,7 @@ add_compile_definitions(BUFFER_SIZE=1000000)
 add_executable(runUnitTests
 # test/SimpleTests.cpp
 # test/ReadFromFileTests.cpp
-test/ReadFromFileInputDataTest.cpp)
+test/ReadFromFileInputDataTest.cpp
+test/ProcessDataTests.cpp)
 target_link_libraries(runUnitTests gtest gtest_main)
 add_test(runUnitTests runUnitTests)
