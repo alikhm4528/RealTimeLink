@@ -9,7 +9,7 @@ TEST(ReadFromFileTests, NoThrowExceptionForInputData) {
     ReadFromFile ReadTread(&buffer, INPUT_FILE);
     ASSERT_NO_THROW({
         for(int i = 0; i < 10; i++) {
-            ReadTread.readDataFromFile();
+            ReadTread.read();
         }
     });
 }

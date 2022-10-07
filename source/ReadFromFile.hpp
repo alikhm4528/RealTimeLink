@@ -1,36 +1,18 @@
-#ifndef BUFFER_SIZE
-#define BUFFER_SIZE 1000000
-#endif
+#include "FileHandler.hpp"
 
-#include <vector>
-#include <iostream>
-#include <fstream>
-
-class NotEnoughData : public std::exception {
+class ReadFromFile : public FileHandler {
     private:
-        const char* message;
-    public:
-        NotEnoughData(const char* message) : message(message) {}
-
-        virtual const char *what() const noexcept {
-            return message;
-        }
-};
-
-class ReadFromFile {
-    private:
-        std::vector<int>* pbuff;
         std::ifstream file;
     public:
         ReadFromFile(std::vector<int>* pbuff, std::string fileName) 
-            : pbuff(pbuff) {
+            : FileHandler(pbuff) {
                 file.open(fileName, std::ios::in|std::ios::binary);
             }
         ~ReadFromFile() {
             file.close();
         }
 
-        void readDataFromFile(void) {
+        void read(void) {
             char charBuff[BUFFER_SIZE];
 
             file.read(charBuff, BUFFER_SIZE);

@@ -1,5 +1,5 @@
-#ifndef PROCESSDATA_HPP
-#define PROCESSDATA_HPP
+#ifndef PROCESS_DATA_HPP
+#define PROCESS_DATA_HPP
 
 #include <vector>
 

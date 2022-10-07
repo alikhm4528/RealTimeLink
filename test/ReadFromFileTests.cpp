@@ -10,7 +10,7 @@ TEST(ReadFromFileTests, CorrectData6) {
     int anwser[] = {1, 0, 1, 0, 0, 1};
 
     ReadFromFile ReadTread(&buffer, TEST_FILE);
-    ReadTread.readDataFromFile();
+    ReadTread.read();
 
     for(int i = 0; i < 6; i++) {
         ASSERT_EQ(buffer[i], anwser[i]);
@@ -20,6 +20,6 @@ TEST(ReadFromFileTests, CorrectData6) {
 TEST(ReadFromFileTests, ThrowExceptionNotEnoughData) {
     ReadFromFile ReadTread(&buffer, EXCEPTION_FILE);
     ASSERT_THROW({
-        ReadTread.readDataFromFile();
+        ReadTread.read();
     }, NotEnoughData);
 }
