@@ -16,19 +16,25 @@ class Hamming : public ProcessData {
              , {0, 0, 1, 0, 1, 1, 1}
              , {0, 0, 0, 1, 0, 1, 1}};
     public:
-        Hamming(std::deque<int>* pbuffInput, std::deque<int>* pbuffOutput)
-            : ProcessData(pbuffInput, pbuffOutput) {}
+        Hamming(std::queue<int>* pbuffInput, std::queue<int>* pbuffOutput)
+            : ProcessData(pbuffInput, pbuffOutput) {
+                popedBuffer = new int[HAMMING_MATRIX_HEIGHT];
+            }
         
-        void run(std::deque<int>::iterator startIt) override {
+        void run() override {
             int matrixWidth = HAMMING_MATRIX_WIDTH;
             int matrixHeight = HAMMING_MATRIX_HEIGHT;
 
+            for(int i = 0; i < matrixHeight; i++) {
+                popedBuffer[i] = pbuffInput->front();
+                pbuffInput->pop();
+            }
+
             for(int i = 0; i < matrixWidth; i++) {
                 int element = 0;
-                
                 for(int j = 0; j < matrixHeight; j++)
-                    element += *(startIt + j) * generatorMatrix[j][i];
-                pbuffOutput->push_back(element);
+                    element += popedBuffer[j] * generatorMatrix[j][i];
+                pbuffOutput->push(element);
             }
         }
 };

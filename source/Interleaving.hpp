@@ -10,16 +10,23 @@
 
 class Interleaving : public ProcessData {
     public:
-        Interleaving(std::deque<int>* pbuffInput, std::deque<int>* pbuffOutput)
-            : ProcessData(pbuffInput, pbuffOutput) {}
+        Interleaving(std::queue<int>* pbuffInput, std::queue<int>* pbuffOutput)
+            : ProcessData(pbuffInput, pbuffOutput) {
+                popedBuffer = new int[INTERLEAVING_INPUT_FRAME_SIZE];
+            }
 
-        void run(std::deque<int>::iterator startIt) override {
+        void run() override {
             int columnLength = INTERLEAVING_INPUT_FRAME_SIZE / INTERLEAVING_ROW_LENGTH;
             int rowLength = INTERLEAVING_ROW_LENGTH;
 
+            for(int i = 0; i < INTERLEAVING_INPUT_FRAME_SIZE; i++) {
+                popedBuffer[i] = pbuffInput->front();
+                pbuffInput->pop();
+            }
+
             for(int i = 0; i < rowLength; i++) {
                 for(int j = 0; j < columnLength; j++) {
-                    pbuffOutput->push_back(*(startIt + j * rowLength + i));
+                    pbuffOutput->push(popedBuffer[j * rowLength + i]);
                 }
             }
         }

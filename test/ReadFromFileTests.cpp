@@ -4,7 +4,7 @@
 #include <gtest/gtest.h>
 #include "ReadFromFile.hpp"
 
-std::deque<int> buffer;
+std::queue<int> buffer;
 
 TEST(ReadFromFileTests, CorrectData6) {
     int anwser[] = {1, 0, 1, 0, 0, 1};
@@ -12,8 +12,11 @@ TEST(ReadFromFileTests, CorrectData6) {
     ReadFromFile ReadTread(&buffer, TEST_FILE);
     ReadTread.read();
 
+    ASSERT_EQ(6, buffer.size());
+
     for(int i = 0; i < 6; i++) {
-        ASSERT_EQ(buffer[i], anwser[i]);
+        ASSERT_EQ(buffer.front(), anwser[i]);
+        buffer.pop();
     }
 }
 

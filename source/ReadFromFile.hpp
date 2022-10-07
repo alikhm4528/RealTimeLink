@@ -4,7 +4,7 @@ class ReadFromFile : public FileHandler {
     private:
         std::ifstream file;
     public:
-        ReadFromFile(std::deque<int>* pbuff, std::string fileName) 
+        ReadFromFile(std::queue<int>* pbuff, std::string fileName) 
             : FileHandler(pbuff) {
                 file.open(fileName, std::ios::in|std::ios::binary);
             }
@@ -22,7 +22,8 @@ class ReadFromFile : public FileHandler {
                 // std::cout << message << BUFFER_SIZE << std::endl;
                 throw NotEnoughData(message);
             }
-            for(int i = 0; i < BUFFER_SIZE; i++)
-                pbuff->push_back(charBuff[i]);
+            for(int i = 0; i < BUFFER_SIZE; i++) { 
+                pbuff->push(charBuff[i]);
+            }
         }
 };

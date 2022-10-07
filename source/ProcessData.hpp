@@ -1,15 +1,16 @@
 #ifndef PROCESS_DATA_HPP
 #define PROCESS_DATA_HPP
 
-#include <deque>
+#include <queue>
 
 class ProcessData {
     protected:
-        std::deque<int>* pbuffInput;
-        std::deque<int>* pbuffOutput;
+        std::queue<int>* pbuffInput;
+        std::queue<int>* pbuffOutput;
+        int* popedBuffer;
     public:
-        ProcessData(std::deque<int>* pbuffInput, std::deque<int>* pbuffOutput) 
+        ProcessData(std::queue<int>* pbuffInput, std::queue<int>* pbuffOutput) 
             : pbuffInput(pbuffInput), pbuffOutput(pbuffOutput) {}
-        virtual void run(std::deque<int>::iterator) {};
+        virtual void run() {};
 };
 #endif

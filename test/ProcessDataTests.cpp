@@ -1,18 +1,18 @@
 #include <gtest/gtest.h>
-#include <deque>
+#include <queue>
 #include "Hamming.hpp"
 #include "Interleaving.hpp"
 
 class ProcessDataTests : public ::testing::Test {
     protected:
-        std::deque<int>* inputBuffer;
-        std::deque<int>* outputBuffer;
+        std::queue<int>* inputBuffer;
+        std::queue<int>* outputBuffer;
         ProcessData* interleaving;
         ProcessData* hamming;
 
         void SetUp() override {
-            inputBuffer = new std::deque<int>();
-            outputBuffer = new std::deque<int>();
+            inputBuffer = new std::queue<int>();
+            outputBuffer = new std::queue<int>();
             interleaving = new Interleaving(inputBuffer, outputBuffer);
             hamming = new Hamming(inputBuffer, outputBuffer);
         }
@@ -26,35 +26,35 @@ class ProcessDataTests : public ::testing::Test {
 };
 
 TEST_F(ProcessDataTests, InputDataSize20Interleaving) {
-    inputBuffer->insert(inputBuffer->end()
-        , { 1,  2,  3,  4,  5,
-            6,  7,  8,  9,  10,
-            11, 12, 13, 14, 15,
-            16, 17, 18, 19, 20});
-    interleaving->run(inputBuffer->begin());
+    for(int i = 0; i < 20; i++) {
+        inputBuffer->push(i + 1);
+    }
+
+    interleaving->run();
 
     ASSERT_EQ(20, outputBuffer->size());
 
     int ind = 0;
     for(int i = 0; i < 5; i++){
         for(int j = 0; j < 4; j++) {
-            ASSERT_EQ(j * 5 + i + 1, (*outputBuffer)[ind++]);
+            ASSERT_EQ(j * 5 + i + 1, outputBuffer->front());
+            outputBuffer->pop();
         }
     }
 }
 
 TEST_F(ProcessDataTests, InputDataSize4Hamming) {
-    inputBuffer->insert(inputBuffer->end()
-        , { 1,  2,  3,  4});
-    hamming->run(inputBuffer->begin());
+    for(int i = 0; i < 4; i++) {
+        inputBuffer->push(i + 1);
+    }
+    hamming->run();
 
     ASSERT_EQ(7, outputBuffer->size());
 
-    ASSERT_EQ(1, (*outputBuffer)[0]);
-    ASSERT_EQ(2, (*outputBuffer)[1]);
-    ASSERT_EQ(3, (*outputBuffer)[2]);
-    ASSERT_EQ(4, (*outputBuffer)[3]);
-    ASSERT_EQ(6, (*outputBuffer)[4]);
-    ASSERT_EQ(9, (*outputBuffer)[5]);
-    ASSERT_EQ(8, (*outputBuffer)[6]);
+    int anwser[] = {1, 2, 3, 4, 6, 9, 8};
+
+    for(int i = 0; i < 7; i++) {
+        ASSERT_EQ(anwser[i], outputBuffer->front());
+        outputBuffer->pop();
+    }
 }
