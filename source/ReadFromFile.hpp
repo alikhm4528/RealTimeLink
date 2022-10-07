@@ -4,7 +4,7 @@ class ReadFromFile : public FileHandler {
     private:
         std::ifstream file;
     public:
-        ReadFromFile(std::vector<int>* pbuff, std::string fileName) 
+        ReadFromFile(std::deque<int>* pbuff, std::string fileName) 
             : FileHandler(pbuff) {
                 file.open(fileName, std::ios::in|std::ios::binary);
             }

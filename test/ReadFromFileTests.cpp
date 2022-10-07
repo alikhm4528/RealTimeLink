@@ -4,7 +4,7 @@
 #include <gtest/gtest.h>
 #include "ReadFromFile.hpp"
 
-std::vector<int> buffer;
+std::deque<int> buffer;
 
 TEST(ReadFromFileTests, CorrectData6) {
     int anwser[] = {1, 0, 1, 0, 0, 1};

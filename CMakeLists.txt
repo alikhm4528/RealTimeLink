@@ -11,22 +11,27 @@ include_directories(${PROJECT_SOURCE_DIR}/source/)
 enable_testing()
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
-# debug cpp flags
+# Debug cpp flags
 SET(CMAKE_CXX_FLAGS_DEBUG "-ggdb")
 
-# executables
+# Executables
 # add_executable(${PROJECT_NAME}
 # source/ReadFromFile.cpp
 # main.cpp)
 
-# preprocessors
-# add_compile_definitions(BUFFER_SIZE=6)
-add_compile_definitions(BUFFER_SIZE=1000000)
+# Test Model
+if(BUFFER_SIZE STREQUAL 6)
+    add_compile_definitions(BUFFER_SIZE=6)
+    set(TEST_SRC_NAMES
+        test/ReadFromFileTests.cpp)
+else()
+    add_compile_definitions(BUFFER_SIZE=1000000)
+    set(TEST_SRC_NAMES
+        test/ReadFromFileInputDataTest.cpp
+        test/ProcessDataTests.cpp)
+endif()
 
-add_executable(runUnitTests
-# test/SimpleTests.cpp
-# test/ReadFromFileTests.cpp
-test/ReadFromFileInputDataTest.cpp
-test/ProcessDataTests.cpp)
+# Tests
+add_executable(runUnitTests ${TEST_SRC_NAMES})
 target_link_libraries(runUnitTests gtest gtest_main)
 add_test(runUnitTests runUnitTests)

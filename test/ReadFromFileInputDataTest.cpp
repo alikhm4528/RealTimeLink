@@ -3,7 +3,7 @@
 #include <gtest/gtest.h>
 #include "ReadFromFile.hpp"
 
-std::vector<int> buffer;
+std::deque<int> buffer;
 
 TEST(ReadFromFileTests, NoThrowExceptionForInputData) {
     ReadFromFile ReadTread(&buffer, INPUT_FILE);

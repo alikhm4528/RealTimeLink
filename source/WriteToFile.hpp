@@ -5,9 +5,9 @@ class WriteToFile : public FileHandler {
         int outputBufferSize;
         std::ofstream file;
         char* charBuff;
-        std::vector<int>::iterator startIt;
+        std::deque<int>::iterator startIt;
     public:
-        WriteToFile(std::vector<int>* pbuff, std::string fileName, int outputBufferSize) 
+        WriteToFile(std::deque<int>* pbuff, std::string fileName, int outputBufferSize) 
             : FileHandler(pbuff), outputBufferSize(outputBufferSize) {
                 file.open(fileName, std::ios::out|std::ios::binary);
                 charBuff = new char[outputBufferSize];

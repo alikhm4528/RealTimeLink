@@ -1,18 +1,18 @@
 #include <gtest/gtest.h>
-#include <vector>
+#include <deque>
 #include "Hamming.hpp"
 #include "Interleaving.hpp"
 
 class ProcessDataTests : public ::testing::Test {
     protected:
-        std::vector<int>* inputBuffer;
-        std::vector<int>* outputBuffer;
+        std::deque<int>* inputBuffer;
+        std::deque<int>* outputBuffer;
         ProcessData* interleaving;
         ProcessData* hamming;
 
         void SetUp() override {
-            inputBuffer = new std::vector<int>();
-            outputBuffer = new std::vector<int>();
+            inputBuffer = new std::deque<int>();
+            outputBuffer = new std::deque<int>();
             interleaving = new Interleaving(inputBuffer, outputBuffer);
             hamming = new Hamming(inputBuffer, outputBuffer);
         }

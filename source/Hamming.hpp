@@ -16,10 +16,10 @@ class Hamming : public ProcessData {
              , {0, 0, 1, 0, 1, 1, 1}
              , {0, 0, 0, 1, 0, 1, 1}};
     public:
-        Hamming(std::vector<int>* pbuffInput, std::vector<int>* pbuffOutput)
+        Hamming(std::deque<int>* pbuffInput, std::deque<int>* pbuffOutput)
             : ProcessData(pbuffInput, pbuffOutput) {}
         
-        void run(std::vector<int>::iterator startIt) override {
+        void run(std::deque<int>::iterator startIt) override {
             int matrixWidth = HAMMING_MATRIX_WIDTH;
             int matrixHeight = HAMMING_MATRIX_HEIGHT;
 

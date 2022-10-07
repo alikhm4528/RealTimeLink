@@ -10,10 +10,10 @@
 
 class Interleaving : public ProcessData {
     public:
-        Interleaving(std::vector<int>* pbuffInput, std::vector<int>* pbuffOutput)
+        Interleaving(std::deque<int>* pbuffInput, std::deque<int>* pbuffOutput)
             : ProcessData(pbuffInput, pbuffOutput) {}
 
-        void run(std::vector<int>::iterator startIt) override {
+        void run(std::deque<int>::iterator startIt) override {
             int columnLength = INTERLEAVING_INPUT_FRAME_SIZE / INTERLEAVING_ROW_LENGTH;
             int rowLength = INTERLEAVING_ROW_LENGTH;
 

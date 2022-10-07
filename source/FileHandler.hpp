@@ -5,7 +5,7 @@
 #define BUFFER_SIZE 1000000
 #endif
 
-#include <vector>
+#include <deque>
 #include <iostream>
 #include <fstream>
 
@@ -23,8 +23,8 @@ class NotEnoughData : public std::exception {
 
 class FileHandler {
     protected:
-        std::vector<int>* pbuff;
+        std::deque<int>* pbuff;
     public:
-        FileHandler(std::vector<int>* pbuff) : pbuff(pbuff) {}
+        FileHandler(std::deque<int>* pbuff) : pbuff(pbuff) {}
 };
 #endif
