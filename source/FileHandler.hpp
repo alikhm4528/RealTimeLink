@@ -1,10 +1,6 @@
 #ifndef FILE_HANDLER_HPP
 #define FILE_HANDLER_HPP
 
-#ifndef BUFFER_SIZE
-#define BUFFER_SIZE 1000000
-#endif
-
 #include <queue>
 #include <iostream>
 #include <fstream>
@@ -24,7 +20,9 @@ class NotEnoughData : public std::exception {
 class FileHandler {
     protected:
         std::queue<int>* pbuff;
+        int bufferSize;
     public:
-        FileHandler(std::queue<int>* pbuff) : pbuff(pbuff) {}
+        FileHandler(std::queue<int>* pbuff, int bufferSize) 
+        : pbuff(pbuff), bufferSize(bufferSize) {}
 };
 #endif
