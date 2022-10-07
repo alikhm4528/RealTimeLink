@@ -19,24 +19,12 @@ SET(CMAKE_CXX_FLAGS_DEBUG "-ggdb")
 # source/ReadFromFile.cpp
 # main.cpp)
 
-# Test Model
-if(BUFFER_SIZE STREQUAL 6)
-    # add_compile_definitions(BUFFER_SIZE=6)
-    # set(TEST_SRC_NAMES
-        # test/ReadFromFileTests.cpp)
-else()
-    # add_compile_definitions(BUFFER_SIZE=1000000)
-    # set(TEST_SRC_NAMES
-        # test/ReadFromFileInputDataTest.cpp
-        # test/ProcessDataTests.cpp)
-endif()
-
-set(TEST_SRC_NAMES
+# Tests
+set(TEST_SOURCES
 # test/SimpleTests.cpp
 test/ReadFromFileTests.cpp
-test/ProcessDataTests.cpp)
-
-# Tests
-add_executable(runUnitTests ${TEST_SRC_NAMES})
+test/ProcessDataTests.cpp
+test/WriteToFileTests.cpp)
+add_executable(runUnitTests ${TEST_SOURCES})
 target_link_libraries(runUnitTests gtest gtest_main)
 add_test(runUnitTests runUnitTests)

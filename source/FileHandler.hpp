@@ -20,9 +20,17 @@ class NotEnoughData : public std::exception {
 class FileHandler {
     protected:
         std::queue<int>* pbuff;
+        std::fstream file;
+        char* charBuff;
         int bufferSize;
     public:
         FileHandler(std::queue<int>* pbuff, int bufferSize) 
-        : pbuff(pbuff), bufferSize(bufferSize) {}
+        : pbuff(pbuff), bufferSize(bufferSize) {
+            charBuff = new char [bufferSize];
+        }
+        ~FileHandler() {
+            if(file.is_open())
+                file.close();
+        }
 };
 #endif
