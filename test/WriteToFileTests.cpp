@@ -1,5 +1,5 @@
-#define TEST_OUTPUT_FILE "/home/alikhm/100G/project/RealTimeLink/Code Base/Database/testOutput.bin"
-#define INPUT_FILE "/home/alikhm/100G/project/RealTimeLink/Code Base/Database/inputData.bin"
+#define TEST_OUTPUT_FILE "/home/alikhm/100G/project/RealTimeLink/RealTimeLink/Database/testOutput.bin"
+#define INPUT_FILE "/home/alikhm/100G/project/RealTimeLink/RealTimeLink/Database/inputData.bin"
 
 #include <gtest/gtest.h>
 #include <fstream>

@@ -1,6 +1,6 @@
-#define TEST_FILE "/home/alikhm/100G/project/RealTimeLink/Code Base/Database/test.bin"
-#define EXCEPTION_FILE "/home/alikhm/100G/project/RealTimeLink/Code Base/Database/throwException.bin"
-#define INPUT_FILE "/home/alikhm/100G/project/RealTimeLink/Code Base/Database/inputData.bin"
+#define TEST_FILE "/home/alikhm/100G/project/RealTimeLink/RealTimeLink/Database/test.bin"
+#define EXCEPTION_FILE "/home/alikhm/100G/project/RealTimeLink/RealTimeLink/Database/throwException.bin"
+#define INPUT_FILE "/home/alikhm/100G/project/RealTimeLink/RealTimeLink/Database/inputData.bin"
 
 #include <gtest/gtest.h>
 #include "ReadFromFile.hpp"
