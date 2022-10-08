@@ -16,6 +16,6 @@ class ProcessData {
                 iteration();
         }
     protected:
-        virtual void iteration();
+        virtual void iteration() {}
 };
 #endif
