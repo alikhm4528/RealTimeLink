@@ -16,6 +16,11 @@ class Interleaving : public ProcessData {
             }
 
         void run() override {
+            while(!pbuffInput->empty())
+                iteration();
+        }
+    private:
+        void iteration() {
             int columnLength = INTERLEAVING_INPUT_FRAME_SIZE / INTERLEAVING_ROW_LENGTH;
             int rowLength = INTERLEAVING_ROW_LENGTH;
 

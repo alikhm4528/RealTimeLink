@@ -22,6 +22,11 @@ class Hamming : public ProcessData {
             }
         
         void run() override {
+            while(!pbuffInput->empty())
+                iteration();
+        }
+    private:
+        void iteration() {
             int matrixWidth = HAMMING_MATRIX_WIDTH;
             int matrixHeight = HAMMING_MATRIX_HEIGHT;
 
