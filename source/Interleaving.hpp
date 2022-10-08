@@ -14,13 +14,8 @@ class Interleaving : public ProcessData {
             : ProcessData(pbuffInput, pbuffOutput) {
                 popedBuffer = new int[INTERLEAVING_INPUT_FRAME_SIZE];
             }
-
-        void run() override {
-            while(!pbuffInput->empty())
-                iteration();
-        }
     private:
-        void iteration() {
+        void iteration() override {
             int columnLength = INTERLEAVING_INPUT_FRAME_SIZE / INTERLEAVING_ROW_LENGTH;
             int rowLength = INTERLEAVING_ROW_LENGTH;
 

@@ -11,6 +11,11 @@ class ProcessData {
     public:
         ProcessData(std::queue<int>* pbuffInput, std::queue<int>* pbuffOutput) 
             : pbuffInput(pbuffInput), pbuffOutput(pbuffOutput) {}
-        virtual void run() {};
+        void run() {
+            while(!pbuffInput->empty())
+                iteration();
+        }
+    protected:
+        virtual void iteration();
 };
 #endif

@@ -12,7 +12,6 @@ class ReadFromFile : public FileHandler {
             if(!file) {
                 char message[40];
                 sprintf(message, "Number of bytes read %ld\n", file.gcount());
-                // std::cout << message << BUFFER_SIZE << std::endl;
                 throw NotEnoughData(message);
             }
             for(int i = 0; i < bufferSize; i++) { 

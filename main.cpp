@@ -66,15 +66,12 @@ int main() {
 
         #ifdef INTERLEAVING
         ProcessDataThread = new std::thread(&InterleavingWaitable::run, InterleavingObject);
-
-        if(ProcessDataThread->joinable()) 
-            ProcessDataThread->join();
         #else
         ProcessDataThread = new std::thread(&HammingWaitable::run, HammingObject);
+        #endif
 
         if(ProcessDataThread->joinable()) 
             ProcessDataThread->join();
-        #endif
 
         std::this_thread::sleep_for(std::chrono::seconds(1));
 

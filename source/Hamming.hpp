@@ -20,13 +20,8 @@ class Hamming : public ProcessData {
             : ProcessData(pbuffInput, pbuffOutput) {
                 popedBuffer = new int[HAMMING_MATRIX_HEIGHT];
             }
-        
-        void run() override {
-            while(!pbuffInput->empty())
-                iteration();
-        }
     private:
-        void iteration() {
+        void iteration() override {
             int matrixWidth = HAMMING_MATRIX_WIDTH;
             int matrixHeight = HAMMING_MATRIX_HEIGHT;
 
