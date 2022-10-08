@@ -16,7 +16,7 @@ class WriteToFile : public FileHandler {
 
             file.write(charBuff, bufferSize);
             if(!file) {
-                throw NotEnoughData();
+                throw NotEnoughData("Can't write data");
             }
         }
 };

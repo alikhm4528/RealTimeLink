@@ -14,6 +14,13 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 # Debug cpp flags
 SET(CMAKE_CXX_FLAGS_DEBUG "-ggdb")
 
+if(${ALG} STREQUAL "INTERLEAVING")
+    add_compile_definitions(INTERLEAVING)
+else()
+    add_compile_definitions(HAMMING)
+endif()
+
+
 # Executables
 add_executable(${PROJECT_NAME}
 main.cpp)
