@@ -1,5 +1,5 @@
 # Realtime link project
-for compile the project for Interleaving algorithm, go to project directory and use folowing commands:
+to compile the project for Interleaving algorithm, go to project directory and use folowing commands:
 ```
 mkdir build
 cd build
@@ -8,7 +8,7 @@ make
 cd bin
 ./RealTimeLink
 ```
-and for compile the project for Hamming algorithm:
+also for Hamming algorithm:
 ```
 mkdir build
 cd build
