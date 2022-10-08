@@ -15,9 +15,8 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 SET(CMAKE_CXX_FLAGS_DEBUG "-ggdb")
 
 # Executables
-# add_executable(${PROJECT_NAME}
-# source/ReadFromFile.cpp
-# main.cpp)
+add_executable(${PROJECT_NAME}
+main.cpp)
 
 # Tests
 set(TEST_SOURCES
