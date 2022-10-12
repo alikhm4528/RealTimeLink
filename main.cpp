@@ -15,11 +15,12 @@
 
 int cnt = 1;
 
+class WriteWaitable;
+
 ReadFromFile* ReadObject;
-WriteToFile* WriteObject;
+WriteWaitable* WriteObject;
 std::queue<int> inputBuffer;
 std::queue<int> outputBuffer;
-std::queue<int> copy;
 
 std::thread* ReadThread;
 std::thread* WriteThread;
@@ -49,16 +50,27 @@ class HammingWaitable : public Hamming {
         } 
 } HammingObject(&inputBuffer, &outputBuffer);
 
-int main() {
+class WriteWaitable : public WriteToFile {
+    public:
+        WriteWaitable(std::queue<int>* pbuff, std::string fileName, int outputBufferSize)
+            : WriteToFile(pbuff, fileName, outputBufferSize) {}
 
+        void write() {
+            if(ProcessDataThread->joinable())
+                ProcessDataThread->join();
+            WriteToFile::write();
+        }
+};
+
+int main() {
     ReadObject = new ReadFromFile(&inputBuffer, INPUT_FILE, 1000000);
 
     #ifdef INTERLEAVING
     std::cout << "Interleaving Algorithem\n";
-    WriteObject = new WriteToFile(&outputBuffer, OUTPUT_FILE, 1000000);
+    WriteObject = new WriteWaitable(&outputBuffer, OUTPUT_FILE, 1000000);
     #else
     std::cout << "Hamming Algorithem\n";
-    WriteObject = new WriteToFile(&outputBuffer, OUTPUT_FILE, 1750000);
+    WriteObject = new WriteWaitable(&outputBuffer, OUTPUT_FILE, 1750000);
     #endif
 
     for(int i = 0; i < 10; i++) {
@@ -70,23 +82,11 @@ int main() {
         ProcessDataThread = new std::thread(&HammingWaitable::run, HammingObject);
         #endif
 
-        if(ProcessDataThread->joinable()) 
-            ProcessDataThread->join();
+        WriteThread = new std::thread(&WriteWaitable::write, WriteObject);
 
         std::this_thread::sleep_for(std::chrono::seconds(1));
-
-        WriteThread = new std::thread(&WriteToFile::write, WriteObject);
-        if(WriteThread->joinable()) 
-            WriteThread->join();
         
-        delete ReadThread;
-        delete ProcessDataThread;
-        delete WriteThread;
         std::cout << "iteration " << cnt++ << "\n";
     }
-
-    delete ReadObject;
-    delete WriteObject;
-
     return 0;
 }
