@@ -3,15 +3,15 @@
 
 #include <gtest/gtest.h>
 #include <fstream>
-#include "ReadFromFile.hpp"
-#include "WriteToFile.hpp"
+#include "ReadChunk.hpp"
+#include "WriteChunk.hpp"
 
-class WriteToFileTests : public ::testing::Test {
+class WriteChunkTests : public ::testing::Test {
     protected:
         std::queue<int>* inputBuffer;
         std::queue<int>* outputBuffer;
-        ReadFromFile* ReadThread;
-        WriteToFile* WriteThread;
+        ReadChunk* ReadThread;
+        WriteChunk* WriteThread;
 
         void SetUp() override {
             inputBuffer = new std::queue<int>();
@@ -28,17 +28,17 @@ class WriteToFileTests : public ::testing::Test {
         }
 };
 
-TEST_F(WriteToFileTests, CorrectData6) {
+TEST_F(WriteChunkTests, CorrectData6) {
     for(int i = 0; i < 6; i++) {
         inputBuffer->push(i);
     }
 
-    WriteThread = new WriteToFile(inputBuffer, TEST_OUTPUT_FILE, 6);
+    WriteThread = new WriteChunk(inputBuffer, TEST_OUTPUT_FILE, 6);
     WriteThread->write();
 
     delete WriteThread; // to close the file
 
-    ReadThread = new ReadFromFile(outputBuffer, TEST_OUTPUT_FILE, 6);
+    ReadThread = new ReadChunk(outputBuffer, TEST_OUTPUT_FILE, 6);
     ReadThread->read();
 
     ASSERT_EQ(6, outputBuffer->size());
@@ -49,15 +49,15 @@ TEST_F(WriteToFileTests, CorrectData6) {
     }
 }
 
-TEST_F(WriteToFileTests, EntireInputDataReadWrite) {
-    ReadThread = new ReadFromFile(inputBuffer, INPUT_FILE, 1000000);
+TEST_F(WriteChunkTests, EntireInputDataReadWrite) {
+    ReadThread = new ReadChunk(inputBuffer, INPUT_FILE, 1000000);
     for(int i = 0; i < 10; i++) {
         ReadThread->read();
     }
 
     delete ReadThread;
 
-    WriteThread = new WriteToFile(inputBuffer, TEST_OUTPUT_FILE, 1000000);
+    WriteThread = new WriteChunk(inputBuffer, TEST_OUTPUT_FILE, 1000000);
     for(int i = 0; i < 10; i++) {
         WriteThread->write();
     }

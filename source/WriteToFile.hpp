@@ -1,22 +1,18 @@
-#include "FileHandler.hpp"
+#include <thread>
+#include <queue>
+#include "WriteChunk.hpp"
+#include "ProcessData.hpp"
 
-class WriteToFile : public FileHandler {
+class WriteToFile : public WriteChunk {
     public:
-        WriteToFile(std::queue<int>* pbuff, std::string fileName, int outputBufferSize) 
-            : FileHandler(pbuff, outputBufferSize) {
-                file.open(fileName, std::ios::out|std::ios::binary);
-                charBuff = new char[outputBufferSize];
-            }
+        WriteToFile(std::queue<int>* pbuff, std::string fileName, int outputBufferSize)
+            : WriteChunk(pbuff, fileName, outputBufferSize) {}
 
-        void write() {
-            for(int i = 0; i < bufferSize; i++) {
-                charBuff[i] = pbuff->front();
-                pbuff->pop();
-            }
-
-            file.write(charBuff, bufferSize);
-            if(!file) {
-                throw NotEnoughData("Can't write data");
+        void write(ProcessData* ProcessObject) {
+            while(!ProcessObject->isEndOfProcess() || !pbuff->empty()) {
+                if(pbuff->size() == bufferSize)
+                    WriteChunk::write();
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
             }
         }
 };

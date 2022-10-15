@@ -3,12 +3,12 @@
 #define INPUT_FILE "/home/alikhm/100G/project/RealTimeLink/RealTimeLink/Database/inputData.bin"
 
 #include <gtest/gtest.h>
-#include "ReadFromFile.hpp"
+#include "ReadChunk.hpp"
 
-class ReadFromFileTests : public ::testing::Test {
+class ReadChunkTests : public ::testing::Test {
     protected:
         std::queue<int>* buffer;
-        ReadFromFile* ReadThread;
+        ReadChunk* ReadThread;
 
         void SetUp() override {
             buffer = new std::queue<int>();
@@ -21,10 +21,10 @@ class ReadFromFileTests : public ::testing::Test {
         }
 };
 
-TEST_F(ReadFromFileTests, CorrectData6) {
+TEST_F(ReadChunkTests, CorrectData6) {
     int anwser[] = {1, 0, 1, 0, 0, 1};
 
-    ReadThread = new ReadFromFile(buffer, TEST_FILE, 6);
+    ReadThread = new ReadChunk(buffer, TEST_FILE, 6);
     ReadThread->read();
 
     ASSERT_EQ(6, buffer->size());
@@ -35,15 +35,15 @@ TEST_F(ReadFromFileTests, CorrectData6) {
     }
 }
 
-TEST_F(ReadFromFileTests, ThrowExceptionNotEnoughData) {
-    ReadThread = new ReadFromFile(buffer, EXCEPTION_FILE, 6);
+TEST_F(ReadChunkTests, ThrowExceptionNotEnoughData) {
+    ReadThread = new ReadChunk(buffer, EXCEPTION_FILE, 6);
     ASSERT_THROW({
         ReadThread->read();
     }, NotEnoughData);
 }
 
-TEST_F(ReadFromFileTests, NoThrowExceptionForInputData) {
-    ReadThread = new ReadFromFile(buffer, INPUT_FILE, 1000000);
+TEST_F(ReadChunkTests, NoThrowExceptionForInputData) {
+    ReadThread = new ReadChunk(buffer, INPUT_FILE, 1000000);
 
     ASSERT_NO_THROW({
         for(int i = 0; i < 10; i++) {

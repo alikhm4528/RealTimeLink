@@ -1,21 +1,20 @@
-#include "FileHandler.hpp"
+#ifndef READ_FROM_FILE_HPP
+#define READ_FROM_FILE_HPP
 
-class ReadFromFile : public FileHandler {
+#include <thread>
+#include <queue>
+#include "ReadChunk.hpp"
+
+class ReadFromFile : public ReadChunk {
     public:
-        ReadFromFile(std::queue<int>* pbuff, std::string fileName, int bufferSize) 
-            : FileHandler(pbuff, bufferSize) {
-                file.open(fileName, std::ios::in|std::ios::binary);
-            }
+        ReadFromFile(std::queue<int>* pbuff, std::string fileName, int bufferSize)
+            : ReadChunk(pbuff, fileName, bufferSize) {}
 
-        void read(void) {
-            file.read(charBuff, bufferSize);
-            if(!file) {
-                char message[40];
-                sprintf(message, "Number of bytes read %ld\n", file.gcount());
-                throw NotEnoughData(message);
-            }
-            for(int i = 0; i < bufferSize; i++) { 
-                pbuff->push(charBuff[i]);
+        void read() {
+            while(!isEndOfRead()) {
+                ReadChunk::read();
+                std::this_thread::sleep_for(std::chrono::seconds(1));
             }
         }
 };
+#endif
