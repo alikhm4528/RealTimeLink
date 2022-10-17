@@ -10,10 +10,13 @@
 
 class Interleaving : public ProcessData {
     public:
-        Interleaving(std::queue<int>* pbuffInput, std::queue<int>* pbuffOutput)
-            : ProcessData(pbuffInput, pbuffOutput) {
-                popedBuffer = new int[INTERLEAVING_INPUT_FRAME_SIZE];
-            }
+        Interleaving(std::queue<int>* pbuffInput
+            , std::queue<int>* pbuffOutput
+            , ReadFromFile* ReadObject
+            , int bufferSize)
+                : ProcessData(pbuffInput, pbuffOutput, ReadObject, bufferSize) {
+                    popedBuffer = new int[INTERLEAVING_INPUT_FRAME_SIZE];
+                }
     private:
         void iteration() override {
             int columnLength = INTERLEAVING_INPUT_FRAME_SIZE / INTERLEAVING_ROW_LENGTH;

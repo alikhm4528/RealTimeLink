@@ -10,8 +10,9 @@ class WriteToFile : public WriteChunk {
 
         void write(ProcessData* ProcessObject) {
             while(!ProcessObject->isEndOfProcess() || !pbuff->empty()) {
-                if(pbuff->size() == bufferSize)
+                if(pbuff->size() == bufferSize){
                     WriteChunk::write();
+                }
                 std::this_thread::sleep_for(std::chrono::milliseconds(50));
             }
         }

@@ -12,8 +12,9 @@ class ReadFromFile : public ReadChunk {
 
         void read() {
             while(!isEndOfRead()) {
+                auto oneSecond = std::chrono::steady_clock::now() + std::chrono::seconds(1);
                 ReadChunk::read();
-                std::this_thread::sleep_for(std::chrono::seconds(1));
+                std::this_thread::sleep_until(oneSecond);
             }
         }
 };

@@ -1,20 +1,28 @@
+#define INTERLEAVING_TEST_FILE "/home/alikhm/100G/project/RealTimeLink/RealTimeLink/Database/interleavingTest.bin"
+#define HAMMING_TEST_FILE "/home/alikhm/100G/project/RealTimeLink/RealTimeLink/Database/hammingTest.bin"
+
 #include <gtest/gtest.h>
 #include <queue>
 #include "Hamming.hpp"
 #include "Interleaving.hpp"
+#include "ReadFromFile.hpp"
 
 class ProcessDataTests : public ::testing::Test {
     protected:
         std::queue<int>* inputBuffer;
         std::queue<int>* outputBuffer;
+        ReadFromFile* ReadObjectInterleaving;
+        ReadFromFile* ReadObjectHamming;
         ProcessData* interleaving;
         ProcessData* hamming;
 
         void SetUp() override {
             inputBuffer = new std::queue<int>();
             outputBuffer = new std::queue<int>();
-            interleaving = new Interleaving(inputBuffer, outputBuffer);
-            hamming = new Hamming(inputBuffer, outputBuffer);
+            ReadObjectInterleaving = new ReadFromFile(inputBuffer, INTERLEAVING_TEST_FILE, 20);
+            ReadObjectHamming = new ReadFromFile(inputBuffer, HAMMING_TEST_FILE, 4);
+            interleaving = new Interleaving(inputBuffer, outputBuffer, ReadObjectInterleaving, 20);
+            hamming = new Hamming(inputBuffer, outputBuffer, ReadObjectHamming, 4);
         }
 
         void TearDown() override {
@@ -26,10 +34,7 @@ class ProcessDataTests : public ::testing::Test {
 };
 
 TEST_F(ProcessDataTests, InputDataSize20Interleaving) {
-    for(int i = 0; i < 20; i++) {
-        inputBuffer->push(i + 1);
-    }
-
+    ReadObjectInterleaving->read();
     interleaving->run();
 
     ASSERT_EQ(20, outputBuffer->size());
@@ -44,9 +49,7 @@ TEST_F(ProcessDataTests, InputDataSize20Interleaving) {
 }
 
 TEST_F(ProcessDataTests, InputDataSize4Hamming) {
-    for(int i = 0; i < 4; i++) {
-        inputBuffer->push(i + 1);
-    }
+    ReadObjectHamming->read();
     hamming->run();
 
     ASSERT_EQ(7, outputBuffer->size());

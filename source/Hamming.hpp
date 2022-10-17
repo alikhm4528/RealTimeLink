@@ -16,10 +16,13 @@ class Hamming : public ProcessData {
              , {0, 0, 1, 0, 1, 1, 1}
              , {0, 0, 0, 1, 0, 1, 1}};
     public:
-        Hamming(std::queue<int>* pbuffInput, std::queue<int>* pbuffOutput)
-            : ProcessData(pbuffInput, pbuffOutput) {
-                popedBuffer = new int[HAMMING_MATRIX_HEIGHT];
-            }
+        Hamming(std::queue<int>* pbuffInput
+            , std::queue<int>* pbuffOutput
+            , ReadFromFile* ReadObject
+            , int bufferSize)
+                : ProcessData(pbuffInput, pbuffOutput, ReadObject, bufferSize) {
+                    popedBuffer = new int[HAMMING_MATRIX_HEIGHT];
+                }
     private:
         void iteration() override {
             int matrixWidth = HAMMING_MATRIX_WIDTH;
