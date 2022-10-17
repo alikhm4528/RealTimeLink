@@ -6,15 +6,15 @@
 
 class ProcessData {
     protected:
-        std::queue<int>* pbuffInput;
-        std::queue<int>* pbuffOutput;
+        std::queue<uint8_t>* pbuffInput;
+        std::queue<uint8_t>* pbuffOutput;
         int* popedBuffer;
         bool endOfProcess;
         int bufferSize;
         ReadFromFile* ReadObject;
     public:
-        ProcessData(std::queue<int>* pbuffInput
-            , std::queue<int>* pbuffOutput
+        ProcessData(std::queue<uint8_t>* pbuffInput
+            , std::queue<uint8_t>* pbuffOutput
             , ReadFromFile* ReadObject
             , int bufferSize) 
                 : pbuffInput(pbuffInput)

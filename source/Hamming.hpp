@@ -16,8 +16,8 @@ class Hamming : public ProcessData {
              , {0, 0, 1, 0, 1, 1, 1}
              , {0, 0, 0, 1, 0, 1, 1}};
     public:
-        Hamming(std::queue<int>* pbuffInput
-            , std::queue<int>* pbuffOutput
+        Hamming(std::queue<uint8_t>* pbuffInput
+            , std::queue<uint8_t>* pbuffOutput
             , ReadFromFile* ReadObject
             , int bufferSize)
                 : ProcessData(pbuffInput, pbuffOutput, ReadObject, bufferSize) {

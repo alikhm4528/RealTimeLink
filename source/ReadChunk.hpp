@@ -7,7 +7,7 @@ class ReadChunk : public FileHandler {
     private:
         long long endPos;
     public:
-        ReadChunk(std::queue<int>* pbuff, std::string fileName, int bufferSize) 
+        ReadChunk(std::queue<uint8_t>* pbuff, std::string fileName, int bufferSize) 
             : FileHandler(pbuff, bufferSize) {
                 file.open(fileName, std::ios::in|std::ios::binary);
                 file.seekg(0, std::ios::end);

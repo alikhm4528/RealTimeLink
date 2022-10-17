@@ -8,14 +8,14 @@
 
 class WriteChunkTests : public ::testing::Test {
     protected:
-        std::queue<int>* inputBuffer;
-        std::queue<int>* outputBuffer;
+        std::queue<uint8_t>* inputBuffer;
+        std::queue<uint8_t>* outputBuffer;
         ReadChunk* ReadThread;
         WriteChunk* WriteThread;
 
         void SetUp() override {
-            inputBuffer = new std::queue<int>();
-            outputBuffer = new std::queue<int>();
+            inputBuffer = new std::queue<uint8_t>();
+            outputBuffer = new std::queue<uint8_t>();
         }
 
         void TearDown() override {

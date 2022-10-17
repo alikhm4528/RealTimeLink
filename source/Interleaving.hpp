@@ -10,8 +10,8 @@
 
 class Interleaving : public ProcessData {
     public:
-        Interleaving(std::queue<int>* pbuffInput
-            , std::queue<int>* pbuffOutput
+        Interleaving(std::queue<uint8_t>* pbuffInput
+            , std::queue<uint8_t>* pbuffOutput
             , ReadFromFile* ReadObject
             , int bufferSize)
                 : ProcessData(pbuffInput, pbuffOutput, ReadObject, bufferSize) {

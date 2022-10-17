@@ -9,16 +9,16 @@
 
 class ProcessDataTests : public ::testing::Test {
     protected:
-        std::queue<int>* inputBuffer;
-        std::queue<int>* outputBuffer;
+        std::queue<uint8_t>* inputBuffer;
+        std::queue<uint8_t>* outputBuffer;
         ReadFromFile* ReadObjectInterleaving;
         ReadFromFile* ReadObjectHamming;
         ProcessData* interleaving;
         ProcessData* hamming;
 
         void SetUp() override {
-            inputBuffer = new std::queue<int>();
-            outputBuffer = new std::queue<int>();
+            inputBuffer = new std::queue<uint8_t>();
+            outputBuffer = new std::queue<uint8_t>();
             ReadObjectInterleaving = new ReadFromFile(inputBuffer, INTERLEAVING_TEST_FILE, 20);
             ReadObjectHamming = new ReadFromFile(inputBuffer, HAMMING_TEST_FILE, 4);
             interleaving = new Interleaving(inputBuffer, outputBuffer, ReadObjectInterleaving, 20);

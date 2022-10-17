@@ -15,6 +15,7 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <cstdint>
 #include "ReadFromFile.hpp"
 #include "WriteToFile.hpp"
 #include "Interleaving.hpp"
@@ -28,8 +29,8 @@ class ReadFromFile;
 ReadFromFile* ReadObject;
 WriteToFile* WriteObject;
 ProcessData* ProcessObject;
-std::queue<int> inputBuffer;
-std::queue<int> outputBuffer;
+std::queue<uint8_t> inputBuffer;
+std::queue<uint8_t> outputBuffer;
 
 std::thread* ReadThread;
 std::thread* WriteThread;

@@ -5,7 +5,7 @@
 
 class WriteChunk : public FileHandler {
     public:
-        WriteChunk(std::queue<int>* pbuff, std::string fileName, int outputBufferSize) 
+        WriteChunk(std::queue<uint8_t>* pbuff, std::string fileName, int outputBufferSize) 
             : FileHandler(pbuff, outputBufferSize) {
                 file.open(fileName, std::ios::out|std::ios::binary);
                 charBuff = new char[outputBufferSize];

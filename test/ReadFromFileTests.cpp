@@ -7,11 +7,11 @@
 
 class ReadChunkTests : public ::testing::Test {
     protected:
-        std::queue<int>* buffer;
+        std::queue<uint8_t>* buffer;
         ReadChunk* ReadThread;
 
         void SetUp() override {
-            buffer = new std::queue<int>();
+            buffer = new std::queue<uint8_t>();
         }
 
         void TearDown() override {
