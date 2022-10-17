@@ -3,8 +3,8 @@
 
 #include <gtest/gtest.h>
 #include <fstream>
-#include "ReadChunk.hpp"
-#include "WriteChunk.hpp"
+#include "ReadChunk.h"
+#include "WriteChunk.h"
 
 class WriteChunkTests : public ::testing::Test {
     protected:

@@ -3,9 +3,9 @@
 
 #include <gtest/gtest.h>
 #include <queue>
-#include "Hamming.hpp"
-#include "Interleaving.hpp"
-#include "ReadFromFile.hpp"
+#include "Hamming.h"
+#include "Interleaving.h"
+#include "ReadFromFile.h"
 
 class ProcessDataTests : public ::testing::Test {
     protected:

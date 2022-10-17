@@ -16,15 +16,12 @@
 #include <thread>
 #include <chrono>
 #include <cstdint>
-#include "ReadFromFile.hpp"
-#include "WriteToFile.hpp"
-#include "Interleaving.hpp"
-#include "Hamming.hpp"
+#include "ReadFromFile.h"
+#include "WriteToFile.h"
+#include "Interleaving.h"
+#include "Hamming.h"
 
 int cnt = 1;
-
-class WriteToFile;
-class ReadFromFile;
 
 ReadFromFile* ReadObject;
 WriteToFile* WriteObject;

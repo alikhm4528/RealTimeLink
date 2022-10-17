@@ -5,7 +5,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 
 include_directories(${PROJECT_SOURCE_DIR}/header/)
-include_directories(${PROJECT_SOURCE_DIR}/source/)
 
 # GTest
 enable_testing()
@@ -20,17 +19,30 @@ else()
     add_compile_definitions(HAMMING)
 endif()
 
+set(LIB_SOURCES
+source/FileHandler.cpp
+source/Hamming.cpp
+source/Interleaving.cpp
+source/ProcessData.cpp
+source/ReadChunk.cpp
+source/ReadFromFile.cpp
+source/WriteChunk.cpp
+source/WriteToFile.cpp)
+
+set(LIBRARY_NAME RealTimeLinkLib)
+
+add_library(${LIBRARY_NAME} SHARED ${LIB_SOURCES})
 
 # Executables
-add_executable(${PROJECT_NAME}
-main.cpp)
+add_executable(${PROJECT_NAME} main.cpp)
+target_link_libraries(${PROJECT_NAME} ${LIBRARY_NAME})
 
 # Tests
 set(TEST_SOURCES
-# test/SimpleTests.cpp
 test/ReadFromFileTests.cpp
 test/ProcessDataTests.cpp
 test/WriteToFileTests.cpp)
+
 add_executable(runUnitTests ${TEST_SOURCES})
-target_link_libraries(runUnitTests gtest gtest_main)
+target_link_libraries(runUnitTests gtest gtest_main ${LIBRARY_NAME})
 add_test(runUnitTests runUnitTests)

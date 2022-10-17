@@ -3,7 +3,7 @@
 #define INPUT_FILE "/home/alikhm/100G/project/RealTimeLink/RealTimeLink/Database/inputData.bin"
 
 #include <gtest/gtest.h>
-#include "ReadChunk.hpp"
+#include "ReadChunk.h"
 
 class ReadChunkTests : public ::testing::Test {
     protected:

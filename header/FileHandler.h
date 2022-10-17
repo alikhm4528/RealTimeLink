@@ -1,9 +1,8 @@
-#ifndef FILE_HANDLER_HPP
-#define FILE_HANDLER_HPP
-
-#include <queue>
-#include <iostream>
+#ifndef FILE_HANDLER_H
+#define FILE_HANDLER_H
 #include <fstream>
+#include <queue>
+#include <cstdint>
 
 class NotEnoughData : public std::exception {
     private:
@@ -24,13 +23,7 @@ class FileHandler {
         char* charBuff;
         int bufferSize;
     public:
-        FileHandler(std::queue<uint8_t>* pbuff, int bufferSize) 
-        : pbuff(pbuff), bufferSize(bufferSize) {
-            charBuff = new char [bufferSize];
-        }
-        ~FileHandler() {
-            if(file.is_open())
-                file.close();
-        }
+        FileHandler(std::queue<uint8_t>*, int);
+        ~FileHandler();
 };
 #endif
