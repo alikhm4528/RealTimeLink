@@ -1,5 +1,5 @@
-#define TEST_OUTPUT_FILE "/home/alikhm/100G/project/RealTimeLink/RealTimeLink/Database/testOutput.bin"
-#define INPUT_FILE "/home/alikhm/100G/project/RealTimeLink/RealTimeLink/Database/inputData.bin"
+#define TEST_OUTPUT_FILE "/home/alikhm/project/RealTimeLink/Database/testOutput.bin"
+#define INPUT_FILE "/home/alikhm/project/RealTimeLink/Database/inputData.bin"
 
 #include <gtest/gtest.h>
 #include <fstream>
@@ -21,10 +21,6 @@ class WriteChunkTests : public ::testing::Test {
         void TearDown() override {
             delete inputBuffer;
             delete outputBuffer;
-            if(ReadThread != nullptr)
-                delete ReadThread;
-            if(WriteThread != nullptr)
-                delete WriteThread;
         }
 };
 
@@ -40,6 +36,8 @@ TEST_F(WriteChunkTests, CorrectData6) {
 
     ReadThread = new ReadChunk(outputBuffer, TEST_OUTPUT_FILE, 6);
     ReadThread->read();
+
+    delete ReadThread;
 
     ASSERT_EQ(6, outputBuffer->size());
 
@@ -79,4 +77,4 @@ TEST_F(WriteChunkTests, EntireInputDataReadWrite) {
     ASSERT_TRUE(std::equal(std::istreambuf_iterator<char>(f1.rdbuf()),
                       std::istreambuf_iterator<char>(),
                       std::istreambuf_iterator<char>(f2.rdbuf())));
-}   
+}

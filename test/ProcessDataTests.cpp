@@ -1,5 +1,5 @@
-#define INTERLEAVING_TEST_FILE "/home/alikhm/100G/project/RealTimeLink/RealTimeLink/Database/interleavingTest.bin"
-#define HAMMING_TEST_FILE "/home/alikhm/100G/project/RealTimeLink/RealTimeLink/Database/hammingTest.bin"
+#define INTERLEAVING_TEST_FILE "/home/alikhm/project/RealTimeLink/Database/interleavingTest.bin"
+#define HAMMING_TEST_FILE "/home/alikhm/project/RealTimeLink/Database/hammingTest.bin"
 
 #include <gtest/gtest.h>
 #include <queue>

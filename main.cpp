@@ -1,5 +1,5 @@
-#define INPUT_FILE "/home/alikhm/100G/project/RealTimeLink/RealTimeLink/Database/inputData.bin"
-#define OUTPUT_FILE "/home/alikhm/100G/project/RealTimeLink/RealTimeLink/Database/outputData.bin"
+#define INPUT_FILE "/home/alikhm/project/RealTimeLink/Database/inputData.bin"
+#define OUTPUT_FILE "/home/alikhm/project/RealTimeLink/Database/outputData.bin"
 
 #if !defined INTERLEAVING && !defined HAMMING
     #define INTERLEAVING

@@ -11,3 +11,8 @@ FileHandler::~FileHandler() {
     if(file.is_open())
         file.close();
 }
+
+void FileHandler::closeFile() {
+    if(file.is_open())
+        file.close();
+}

@@ -25,5 +25,7 @@ class FileHandler {
     public:
         FileHandler(std::queue<uint8_t>*, int);
         ~FileHandler();
+        
+        void closeFile();
 };
 #endif
