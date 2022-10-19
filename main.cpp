@@ -1,5 +1,8 @@
-#define INPUT_FILE "/home/alikhm/project/RealTimeLink/Database/inputData.bin"
-#define OUTPUT_FILE "/home/alikhm/project/RealTimeLink/Database/outputData.bin"
+#ifndef PREFIX
+#define PREFIX "/home/alikhm/100G/project/RealTimeLink/RealTimeLink/Database/"
+#endif
+
+#define getAddress(file) (std::string)PREFIX + file
 
 #if !defined INTERLEAVING && !defined HAMMING
     #define INTERLEAVING
@@ -34,8 +37,12 @@ int main() {
     std::thread* WriteThread;
     std::thread* ProcessDataThread;
 
-    ReadObject = new ReadFromFile(&inputBuffer, INPUT_FILE, INPUT_BUFFER_SIZE);
-    WriteObject = new WriteToFile(&outputBuffer, OUTPUT_FILE, OUTPUT_BUFFER_SIZE);
+    ReadObject = new ReadFromFile(&inputBuffer
+        , getAddress("inputData.bin")
+        , INPUT_BUFFER_SIZE);
+    WriteObject = new WriteToFile(&outputBuffer
+        , (std::string)PREFIX + "outputData.bin"
+        , OUTPUT_BUFFER_SIZE);
 
     #ifdef INTERLEAVING
     std::cout << "Interleaving Algorithem\n";

@@ -1,5 +1,8 @@
-#define TEST_OUTPUT_FILE "/home/alikhm/project/RealTimeLink/Database/testOutput.bin"
-#define INPUT_FILE "/home/alikhm/project/RealTimeLink/Database/inputData.bin"
+#ifndef PREFIX
+#define PREFIX "/home/alikhm/100G/project/RealTimeLink/RealTimeLink/Database/"
+#endif
+
+#define getAddress(file) (std::string)PREFIX + file
 
 #include <gtest/gtest.h>
 #include <fstream>
@@ -29,12 +32,16 @@ TEST_F(WriteChunkTests, CorrectData6) {
         inputBuffer->push(i);
     }
 
-    WriteThread = new WriteChunk(inputBuffer, TEST_OUTPUT_FILE, 6);
+    WriteThread = new WriteChunk(inputBuffer
+        , getAddress("testOutput.bin")
+        , 6);
     WriteThread->write();
 
     delete WriteThread; // to close the file
 
-    ReadThread = new ReadChunk(outputBuffer, TEST_OUTPUT_FILE, 6);
+    ReadThread = new ReadChunk(outputBuffer
+        , getAddress("testOutput.bin")
+        , 6);
     ReadThread->read();
 
     delete ReadThread;
@@ -48,22 +55,28 @@ TEST_F(WriteChunkTests, CorrectData6) {
 }
 
 TEST_F(WriteChunkTests, EntireInputDataReadWrite) {
-    ReadThread = new ReadChunk(inputBuffer, INPUT_FILE, 1000000);
+    ReadThread = new ReadChunk(inputBuffer
+        , getAddress("inputData.bin")
+        , 1000000);
     for(int i = 0; i < 10; i++) {
         ReadThread->read();
     }
 
     delete ReadThread;
 
-    WriteThread = new WriteChunk(inputBuffer, TEST_OUTPUT_FILE, 1000000);
+    WriteThread = new WriteChunk(inputBuffer
+        , getAddress("testOutput.bin")
+        , 1000000);
     for(int i = 0; i < 10; i++) {
         WriteThread->write();
     }
 
     delete WriteThread;
 
-    std::ifstream f1(INPUT_FILE, std::ifstream::binary|std::ifstream::ate);
-    std::ifstream f2(TEST_OUTPUT_FILE, std::ifstream::binary|std::ifstream::ate);
+    std::ifstream f1(getAddress("inputData.bin")
+        , std::ifstream::binary|std::ifstream::ate);
+    std::ifstream f2(getAddress("testOutput.bin")
+        , std::ifstream::binary|std::ifstream::ate);
 
     if (f1.fail() || f2.fail()) {
         FAIL();

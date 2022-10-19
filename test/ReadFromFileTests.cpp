@@ -1,6 +1,8 @@
-#define TEST_FILE "/home/alikhm/project/RealTimeLink/Database/test.bin"
-#define EXCEPTION_FILE "/home/alikhm/project/RealTimeLink/Database/throwException.bin"
-#define INPUT_FILE "/home/alikhm/project/RealTimeLink/Database/inputData.bin"
+#ifndef PREFIX
+#define PREFIX "/home/alikhm/100G/project/RealTimeLink/RealTimeLink/Database/"
+#endif
+
+#define getAddress(file) (std::string)PREFIX + file
 
 #include <gtest/gtest.h>
 #include "ReadChunk.h"
@@ -24,7 +26,7 @@ class ReadChunkTests : public ::testing::Test {
 TEST_F(ReadChunkTests, CorrectData6) {
     int anwser[] = {1, 0, 1, 0, 0, 1};
 
-    ReadThread = new ReadChunk(buffer, TEST_FILE, 6);
+    ReadThread = new ReadChunk(buffer, getAddress("test.bin"), 6);
     ReadThread->read();
 
     ASSERT_EQ(6, buffer->size());
@@ -36,14 +38,16 @@ TEST_F(ReadChunkTests, CorrectData6) {
 }
 
 TEST_F(ReadChunkTests, ThrowExceptionNotEnoughData) {
-    ReadThread = new ReadChunk(buffer, EXCEPTION_FILE, 6);
+    ReadThread = new ReadChunk(buffer
+        , getAddress("throwException.bin"), 6);
     ASSERT_THROW({
         ReadThread->read();
     }, NotEnoughData);
 }
 
 TEST_F(ReadChunkTests, NoThrowExceptionForInputData) {
-    ReadThread = new ReadChunk(buffer, INPUT_FILE, 1000000);
+    ReadThread = new ReadChunk(buffer
+        , getAddress("inputData.bin"), 1000000);
 
     ASSERT_NO_THROW({
         for(int i = 0; i < 10; i++) {
