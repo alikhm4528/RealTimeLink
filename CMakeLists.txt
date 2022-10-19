@@ -19,6 +19,8 @@ else()
 	add_compile_definitions(HAMMING)
 endif()
 
+add_compile_definitions(PREFIX="${PROJECT_SOURCE_DIR}/Database/")
+
 set(LIB_SOURCES
 source/FileHandler.cpp
 source/Hamming.cpp

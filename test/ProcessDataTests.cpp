@@ -1,5 +1,8 @@
-#define INTERLEAVING_TEST_FILE "/home/alikhm/project/RealTimeLink/Database/interleavingTest.bin"
-#define HAMMING_TEST_FILE "/home/alikhm/project/RealTimeLink/Database/hammingTest.bin"
+#ifndef PREFIX
+#define PREFIX "/home/alikhm/100G/project/RealTimeLink/RealTimeLink/Database/"
+#endif
+
+#define getAddress(file) (std::string)PREFIX + file
 
 #include <gtest/gtest.h>
 #include <queue>
@@ -19,8 +22,10 @@ class ProcessDataTests : public ::testing::Test {
         void SetUp() override {
             inputBuffer = new std::queue<uint8_t>();
             outputBuffer = new std::queue<uint8_t>();
-            ReadObjectInterleaving = new ReadFromFile(inputBuffer, INTERLEAVING_TEST_FILE, 20);
-            ReadObjectHamming = new ReadFromFile(inputBuffer, HAMMING_TEST_FILE, 4);
+            ReadObjectInterleaving = new ReadFromFile(inputBuffer
+                , getAddress("interleavingTest.bin"), 20);
+            ReadObjectHamming = new ReadFromFile(inputBuffer
+                , getAddress("hammingTest.bin"), 4);
             interleaving = new Interleaving(inputBuffer, outputBuffer, 20);
             hamming = new Hamming(inputBuffer, outputBuffer, 4);
         }
