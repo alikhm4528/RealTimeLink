@@ -21,9 +21,9 @@ class FileHandler {
         std::queue<uint8_t>* buff;
         std::fstream file;
         char* charBuff;
-        int bufferSize;
+        size_t bufferSize;
     public:
-        FileHandler(std::queue<uint8_t>*, int);
+        FileHandler(std::queue<uint8_t>*, size_t);
         ~FileHandler();
         
         void closeFile();

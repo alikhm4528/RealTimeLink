@@ -21,19 +21,19 @@
 #include "Interleaving.h"
 #include "Hamming.h"
 
-int cnt = 1;
-
-ReadFromFile* ReadObject;
-WriteToFile* WriteObject;
-ProcessData* ProcessObject;
-std::queue<uint8_t> inputBuffer;
-std::queue<uint8_t> outputBuffer;
-
-std::thread* ReadThread;
-std::thread* WriteThread;
-std::thread* ProcessDataThread;
-
 int main() {
+    uint8_t cnt = 1;
+
+    ReadFromFile* ReadObject;
+    WriteToFile* WriteObject;
+    ProcessData* ProcessObject;
+    std::queue<uint8_t> inputBuffer;
+    std::queue<uint8_t> outputBuffer;
+
+    std::thread* ReadThread;
+    std::thread* WriteThread;
+    std::thread* ProcessDataThread;
+
     ReadObject = new ReadFromFile(&inputBuffer, INPUT_FILE, INPUT_BUFFER_SIZE);
     WriteObject = new WriteToFile(&outputBuffer, OUTPUT_FILE, OUTPUT_BUFFER_SIZE);
 

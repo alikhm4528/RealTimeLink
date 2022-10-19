@@ -1,6 +1,6 @@
 #include "WriteToFile.h"
 
-WriteToFile::WriteToFile(std::queue<uint8_t>* buff, std::string fileName, int outputBufferSize)
+WriteToFile::WriteToFile(std::queue<uint8_t>* buff, std::string fileName, size_t outputBufferSize)
     : WriteChunk(buff, fileName, outputBufferSize) {}
 
 void WriteToFile::write() {

@@ -1,6 +1,6 @@
 #include "ReadFromFile.h"
 
-ReadFromFile::ReadFromFile(std::queue<uint8_t>* buff, std::string fileName, int bufferSize)
+ReadFromFile::ReadFromFile(std::queue<uint8_t>* buff, std::string fileName, size_t bufferSize)
     : ReadChunk(buff, fileName, bufferSize) {}
 
 void ReadFromFile::read() {

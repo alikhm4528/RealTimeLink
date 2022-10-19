@@ -9,12 +9,12 @@ class ProcessData {
     protected:
         std::queue<uint8_t>* buffInput;
         std::queue<uint8_t>* buffOutput;
-        int* popedBuffer;
-        int bufferSize;
+        uint8_t* popedBuffer;
+        size_t bufferSize;
     public:
         ProcessData(std::queue<uint8_t>* buffInput
             , std::queue<uint8_t>* buffOutput
-            , int bufferSize);
+            , size_t bufferSize);
 
         void run();
         void doIterations();
