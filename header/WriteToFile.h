@@ -5,7 +5,7 @@
 
 class WriteToFile : public WriteChunk {
     public:
-        WriteToFile(std::queue<uint8_t>* pbuff, std::string fileName, int outputBufferSize);
+        WriteToFile(std::queue<uint8_t>* buff, std::string fileName, int outputBufferSize);
         
-        void write(ProcessData* ProcessObject);
+        void write();
 };

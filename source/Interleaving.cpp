@@ -1,9 +1,8 @@
 #include "Interleaving.h"
 
-Interleaving::Interleaving(std::queue<uint8_t>* pbuffInput
-    , std::queue<uint8_t>* pbuffOutput
-    , ReadFromFile* ReadObject
-    , int bufferSize) : ProcessData(pbuffInput, pbuffOutput, ReadObject, bufferSize) {
+Interleaving::Interleaving(std::queue<uint8_t>* buffInput
+    , std::queue<uint8_t>* buffOutput
+    , int bufferSize) : ProcessData(buffInput, buffOutput, bufferSize) {
     
     popedBuffer = new int[INTERLEAVING_INPUT_FRAME_SIZE];
 }
@@ -13,13 +12,13 @@ void Interleaving::iteration() {
     int rowLength = INTERLEAVING_ROW_LENGTH;
 
     for(int i = 0; i < INTERLEAVING_INPUT_FRAME_SIZE; i++) {
-        popedBuffer[i] = pbuffInput->front();
-        pbuffInput->pop();
+        popedBuffer[i] = buffInput->front();
+        buffInput->pop();
     }
 
     for(int i = 0; i < rowLength; i++) {
         for(int j = 0; j < columnLength; j++) {
-            pbuffOutput->push(popedBuffer[j * rowLength + i]);
+            buffOutput->push(popedBuffer[j * rowLength + i]);
         }
     }
 }

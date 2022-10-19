@@ -1,7 +1,7 @@
 #include "ReadChunk.h"
 
-ReadChunk::ReadChunk(std::queue<uint8_t>* pbuff, std::string fileName, int bufferSize) 
-    : FileHandler(pbuff, bufferSize) {
+ReadChunk::ReadChunk(std::queue<uint8_t>* buff, std::string fileName, int bufferSize) 
+    : FileHandler(buff, bufferSize) {
 
     file.open(fileName, std::ios::in|std::ios::binary);
     file.seekg(0, std::ios::end);
@@ -17,7 +17,7 @@ void ReadChunk::read(void) {
         throw NotEnoughData(message);
     }
     for(int i = 0; i < bufferSize; i++) { 
-        pbuff->push(charBuff[i]);
+        buff->push(charBuff[i]);
     }
 }
 

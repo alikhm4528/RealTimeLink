@@ -18,7 +18,7 @@ class NotEnoughData : public std::exception {
 
 class FileHandler {
     protected:
-        std::queue<uint8_t>* pbuff;
+        std::queue<uint8_t>* buff;
         std::fstream file;
         char* charBuff;
         int bufferSize;

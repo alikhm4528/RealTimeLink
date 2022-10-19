@@ -1,7 +1,7 @@
 #include "WriteChunk.h"
 
-WriteChunk::WriteChunk(std::queue<uint8_t>* pbuff, std::string fileName, int outputBufferSize) 
-    : FileHandler(pbuff, outputBufferSize) {
+WriteChunk::WriteChunk(std::queue<uint8_t>* buff, std::string fileName, int outputBufferSize) 
+    : FileHandler(buff, outputBufferSize) {
 
     file.open(fileName, std::ios::out|std::ios::binary);
     charBuff = new char[outputBufferSize];
@@ -9,8 +9,8 @@ WriteChunk::WriteChunk(std::queue<uint8_t>* pbuff, std::string fileName, int out
 
 void WriteChunk::write() {
     for(int i = 0; i < bufferSize; i++) {
-        charBuff[i] = pbuff->front();
-        pbuff->pop();
+        charBuff[i] = buff->front();
+        buff->pop();
     }
 
     file.write(charBuff, bufferSize);

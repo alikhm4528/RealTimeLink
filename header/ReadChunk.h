@@ -9,7 +9,7 @@ class ReadChunk : public FileHandler {
     private:
         long long endPos;
     public:
-        ReadChunk(std::queue<uint8_t>* pbuff, std::string fileName, int bufferSize);
+        ReadChunk(std::queue<uint8_t>* buff, std::string fileName, int bufferSize);
 
         void read();
         bool isEndOfRead();

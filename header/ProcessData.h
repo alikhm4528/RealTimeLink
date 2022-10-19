@@ -7,20 +7,17 @@
 
 class ProcessData {
     protected:
-        std::queue<uint8_t>* pbuffInput;
-        std::queue<uint8_t>* pbuffOutput;
+        std::queue<uint8_t>* buffInput;
+        std::queue<uint8_t>* buffOutput;
         int* popedBuffer;
-        bool endOfProcess;
         int bufferSize;
-        ReadFromFile* ReadObject;
     public:
-        ProcessData(std::queue<uint8_t>* pbuffInput
-            , std::queue<uint8_t>* pbuffOutput
-            , ReadFromFile* ReadObject
+        ProcessData(std::queue<uint8_t>* buffInput
+            , std::queue<uint8_t>* buffOutput
             , int bufferSize);
 
         void run();
-        bool isEndOfProcess();
+        void doIterations();
 
     protected:
         virtual void iteration() {}

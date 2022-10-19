@@ -21,8 +21,8 @@ class ProcessDataTests : public ::testing::Test {
             outputBuffer = new std::queue<uint8_t>();
             ReadObjectInterleaving = new ReadFromFile(inputBuffer, INTERLEAVING_TEST_FILE, 20);
             ReadObjectHamming = new ReadFromFile(inputBuffer, HAMMING_TEST_FILE, 4);
-            interleaving = new Interleaving(inputBuffer, outputBuffer, ReadObjectInterleaving, 20);
-            hamming = new Hamming(inputBuffer, outputBuffer, ReadObjectHamming, 4);
+            interleaving = new Interleaving(inputBuffer, outputBuffer, 20);
+            hamming = new Hamming(inputBuffer, outputBuffer, 4);
         }
 
         void TearDown() override {

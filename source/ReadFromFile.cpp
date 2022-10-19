@@ -1,7 +1,7 @@
 #include "ReadFromFile.h"
 
-ReadFromFile::ReadFromFile(std::queue<uint8_t>* pbuff, std::string fileName, int bufferSize)
-    : ReadChunk(pbuff, fileName, bufferSize) {}
+ReadFromFile::ReadFromFile(std::queue<uint8_t>* buff, std::string fileName, int bufferSize)
+    : ReadChunk(buff, fileName, bufferSize) {}
 
 void ReadFromFile::read() {
     while(!isEndOfRead()) {

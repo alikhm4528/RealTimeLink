@@ -7,7 +7,7 @@
 
 class ReadFromFile : public ReadChunk {
     public:
-        ReadFromFile(std::queue<uint8_t>* pbuff, std::string fileName, int bufferSize);
+        ReadFromFile(std::queue<uint8_t>* buff, std::string fileName, int bufferSize);
 
         void read();
 };

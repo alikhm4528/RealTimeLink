@@ -5,7 +5,7 @@
 
 class WriteChunk : public FileHandler {
     public:
-        WriteChunk(std::queue<uint8_t>* pbuff, std::string fileName, int outputBufferSize);
+        WriteChunk(std::queue<uint8_t>* buff, std::string fileName, int outputBufferSize);
 
         void write();
 };

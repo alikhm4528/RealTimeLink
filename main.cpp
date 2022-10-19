@@ -41,19 +41,17 @@ int main() {
     std::cout << "Interleaving Algorithem\n";
     ProcessObject = new Interleaving(&inputBuffer
         , &outputBuffer
-        , ReadObject
         , INPUT_BUFFER_SIZE);
     #else
     std::cout << "Hamming Algorithem\n";
     ProcessObject = new Hamming(&inputBuffer
         , &outputBuffer
-        , ReadObject
         , INPUT_BUFFER_SIZE);
     #endif
 
     ReadThread = new std::thread(&ReadFromFile::read, ReadObject);
     ProcessDataThread = new std::thread(&ProcessData::run, ProcessObject);
-    WriteThread = new std::thread(&WriteToFile::write, WriteObject, ProcessObject);
+    WriteThread = new std::thread(&WriteToFile::write, WriteObject);
 
     ReadThread->join();
     ProcessDataThread->join();
