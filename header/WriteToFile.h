@@ -1,7 +1,5 @@
 #include <thread>
-#include <queue>
 #include "WriteChunk.h"
-#include "ProcessData.h"
 
 class WriteToFile : public WriteChunk {
     public:

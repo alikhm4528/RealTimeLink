@@ -1,9 +1,10 @@
 #ifndef PROCESS_DATA_H
 #define PROCESS_DATA_H
 
+#include <thread>
 #include <queue>
+#include <chrono>
 #include <cstdint>
-#include "ReadFromFile.h"
 
 class ProcessData {
     protected:

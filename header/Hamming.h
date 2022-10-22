@@ -6,7 +6,6 @@
 #define HAMMING_MATRIX_HEIGHT 4
 #endif
 
-#include <cstdint>
 #include "ProcessData.h"
 
 class Hamming : public ProcessData {

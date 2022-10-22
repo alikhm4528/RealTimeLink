@@ -6,7 +6,6 @@
 #define INTERLEAVING_ROW_LENGTH 5
 #endif
 
-#include <cstdint>
 #include "ProcessData.h"
 
 class Interleaving : public ProcessData {

@@ -1,8 +1,6 @@
 #ifndef READ_CHUNK_H
 #define READ_CHUNK_H
 
-#include <queue>
-#include <cstdint>
 #include "FileHandler.h"
 
 class ReadChunk : public FileHandler {

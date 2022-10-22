@@ -1,5 +1,4 @@
 #include "ProcessData.h"
-#include <iostream>
 
 ProcessData::ProcessData(std::queue<uint8_t>* buffInput
     , std::queue<uint8_t>* buffOutput

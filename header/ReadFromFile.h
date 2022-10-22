@@ -1,8 +1,4 @@
-#ifndef READ_FROM_FILE_H
-#define READ_FROM_FILE_H
-
 #include <thread>
-#include <queue>
 #include "ReadChunk.h"
 
 class ReadFromFile : public ReadChunk {
@@ -11,4 +7,3 @@ class ReadFromFile : public ReadChunk {
 
         void read();
 };
-#endif
