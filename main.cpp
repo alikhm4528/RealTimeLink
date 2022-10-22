@@ -24,9 +24,9 @@
 #include "Interleaving.h"
 #include "Hamming.h"
 
-int main() {
-    size_t timer = 1;
+void timerCount();
 
+int main() {
     ReadFromFile* ReadObject;
     WriteToFile* WriteObject;
     ProcessData* ProcessObject;
@@ -60,6 +60,18 @@ int main() {
     ProcessDataThread = new std::thread(&ProcessData::run, ProcessObject);
     WriteThread = new std::thread(&WriteToFile::write, WriteObject);
 
+    timerCount();
+
+    ReadThread->join();
+    ProcessDataThread->join();
+    WriteThread->join();
+
+    return 0;
+}
+
+void timerCount() {
+    size_t timer = 1;
+    
     while(timer <= 10) {
         auto oneSecond = std::chrono::steady_clock::now() + std::chrono::seconds(1);
         std::cout << "\rtimer = " << timer++;
@@ -67,10 +79,4 @@ int main() {
         std::this_thread::sleep_until(oneSecond);
     }
     std::cout << "\n";
-
-    ReadThread->join();
-    ProcessDataThread->join();
-    WriteThread->join();
-
-    return 0;
 }
