@@ -25,7 +25,7 @@
 #include "Hamming.h"
 
 int main() {
-    uint8_t cnt = 1;
+    size_t timer = 1;
 
     ReadFromFile* ReadObject;
     WriteToFile* WriteObject;
@@ -59,6 +59,14 @@ int main() {
     ReadThread = new std::thread(&ReadFromFile::read, ReadObject);
     ProcessDataThread = new std::thread(&ProcessData::run, ProcessObject);
     WriteThread = new std::thread(&WriteToFile::write, WriteObject);
+
+    while(timer <= 10) {
+        auto oneSecond = std::chrono::steady_clock::now() + std::chrono::seconds(1);
+        std::cout << "\rtimer = " << timer++;
+        std::cout.flush();
+        std::this_thread::sleep_until(oneSecond);
+    }
+    std::cout << "\n";
 
     ReadThread->join();
     ProcessDataThread->join();
