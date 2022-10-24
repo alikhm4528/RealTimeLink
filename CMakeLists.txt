@@ -21,23 +21,24 @@ endif()
 
 add_compile_definitions(PREFIX="${PROJECT_SOURCE_DIR}/Database/")
 
-set(LIB_SOURCES
-source/FileHandler.cpp
-source/Hamming.cpp
-source/Interleaving.cpp
+set(PROCESS_LIBS
 source/ProcessData.cpp
+source/Hamming.cpp
+source/Interleaving.cpp)
+
+set(FILE_HANDLE_LIBS
+source/FileHandler.cpp
 source/ReadChunk.cpp
 source/ReadFromFile.cpp
 source/WriteChunk.cpp
 source/WriteToFile.cpp)
 
-set(LIBRARY_NAME RealTimeLinkLib)
-
-add_library(${LIBRARY_NAME} SHARED ${LIB_SOURCES})
+add_library(Process SHARED ${PROCESS_LIBS})
+add_library(FileHandle SHARED ${FILE_HANDLE_LIBS})
 
 # Executables
-add_executable(${PROJECT_NAME} main.cpp)
-target_link_libraries(${PROJECT_NAME} pthread ${LIBRARY_NAME})
+add_executable(${PROJECT_NAME} main.cpp source/Main.cpp)
+target_link_libraries(${PROJECT_NAME} Process FileHandle pthread)
 
 # Tests
 set(TEST_SOURCES
@@ -46,5 +47,5 @@ test/ProcessDataTests.cpp
 test/WriteToFileTests.cpp)
 
 add_executable(runUnitTests ${TEST_SOURCES})
-target_link_libraries(runUnitTests gtest gtest_main pthread ${LIBRARY_NAME})
+target_link_libraries(runUnitTests gtest gtest_main Process FileHandle pthread)
 add_test(runUnitTests runUnitTests)

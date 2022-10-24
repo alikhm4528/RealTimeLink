@@ -1,8 +1,10 @@
 #include "WriteChunk.h"
 
-WriteChunk::WriteChunk(std::queue<uint8_t>* buff, std::string fileName, size_t outputBufferSize) 
-    : FileHandler(buff, outputBufferSize) {
-
+WriteChunk::WriteChunk(std::queue<uint8_t>* buff
+    , std::string fileName
+    , size_t outputBufferSize) 
+        : FileHandler(buff, outputBufferSize)
+{
     file.open(fileName, std::ios::out|std::ios::binary);
 }
 

@@ -1,9 +1,10 @@
 #include "FileHandler.h"
 
-FileHandler::FileHandler(std::queue<uint8_t>* buff, size_t bufferSize) 
-    : buff(buff)
-    , bufferSize(bufferSize)
-     {
+FileHandler::FileHandler(std::queue<uint8_t>* buff
+    , size_t bufferSize) 
+        : buff(buff)
+        , bufferSize(bufferSize)
+{
         charBuff = new char[bufferSize];
 }
 

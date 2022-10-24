@@ -2,7 +2,9 @@
 
 Hamming::Hamming(std::queue<uint8_t>* buffInput
     , std::queue<uint8_t>* buffOutput
-    , size_t bufferSize) : ProcessData(buffInput, buffOutput, bufferSize) {
+    , size_t bufferSize) 
+        : ProcessData(buffInput, buffOutput, bufferSize)
+{
         popedBuffer = new uint8_t[HAMMING_MATRIX_HEIGHT];
 }
 
