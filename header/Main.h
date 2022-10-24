@@ -7,8 +7,9 @@
 
 #if !defined INTERLEAVING && !defined HAMMING
     #define INTERLEAVING
-    #define OUTPUT_BUFFER_SIZE 1000000
-#elif defined INTERLEAVING
+#endif
+
+#ifdef INTERLEAVING
     #define OUTPUT_BUFFER_SIZE 1000000
 #else
     #define OUTPUT_BUFFER_SIZE 1750000
