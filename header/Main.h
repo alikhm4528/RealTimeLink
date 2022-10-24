@@ -5,18 +5,6 @@
 
 #define getAddress(file) (std::string)PREFIX + file
 
-#if !defined INTERLEAVING && !defined HAMMING
-    #define INTERLEAVING
-#endif
-
-#ifdef INTERLEAVING
-    #define OUTPUT_BUFFER_SIZE 1000000
-#else
-    #define OUTPUT_BUFFER_SIZE 1750000
-#endif
-
-#define INPUT_BUFFER_SIZE 1000000
-
 #include <iostream>
 #include <thread>
 #include <chrono>
@@ -26,7 +14,9 @@
 #include "Interleaving.h"
 #include "Hamming.h"
 
-class Main {
+enum Algorithm {INTERLEAVING, HAMMING};
+
+class Main { 
     private:
         ReadFromFile* ReadObject;
         WriteToFile* WriteObject;
@@ -38,13 +28,15 @@ class Main {
         std::thread* WriteThread;
         std::thread* ProcessDataThread;
     public:
+        Main(Algorithm);
         void run();
     private:
         void timerCount();
         void initBuffers();
-        void initReadObject();
-        void initWriteObject();
-        void initProcessObject();
+        void initReadObject(size_t);
+        void initWriteObject(size_t);
+        void initInterleaving(size_t);
+        void initHamming(size_t);
         void initThreads();
         void waitUntilAllThreadsJoined();
     

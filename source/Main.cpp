@@ -1,15 +1,21 @@
 #include "Main.h"
 
-void Main::run() {
+Main::Main(Algorithm type) {
     initBuffers();
-    initReadObject();
-    initWriteObject();
-    initProcessObject();
+    initReadObject(1000000);
+    
+    if(type == INTERLEAVING) {
+        initWriteObject(1000000);
+        initInterleaving(1000000);
+    } else if (type == HAMMING) {
+        initWriteObject(1750000);
+        initHamming(1000000);
+    }
+}
 
+void Main::run() {
     initThreads();
-
     timerCount();
-
     waitUntilAllThreadsJoined();
 }
 
@@ -31,30 +37,28 @@ void Main::initBuffers() {
     outputBuffer = new std::queue<uint8_t>();
 }
 
-void Main::initReadObject() {
+void Main::initReadObject(size_t inputBufferSize) {
     ReadObject = new ReadFromFile(inputBuffer
         , getAddress("inputData.bin")
-        , INPUT_BUFFER_SIZE);
+        , inputBufferSize);
 }
 
-void Main::initWriteObject() {
+void Main::initWriteObject(size_t outputBufferSize) {
     WriteObject = new WriteToFile(outputBuffer
         , getAddress("outputData.bin")
-        , OUTPUT_BUFFER_SIZE);
+        , outputBufferSize);
 }
 
-void Main::initProcessObject() {
-    #ifdef INTERLEAVING
-    std::cout << "Interleaving Algorithem\n";
+void Main::initInterleaving(size_t inputBufferSize) {
     ProcessObject = new Interleaving(inputBuffer
         , outputBuffer
-        , INPUT_BUFFER_SIZE);
-    #else
-    std::cout << "Hamming Algorithem\n";
+        , inputBufferSize);
+}
+
+void Main::initHamming(size_t inputBufferSize) {
     ProcessObject = new Hamming(inputBuffer
         , outputBuffer
-        , INPUT_BUFFER_SIZE);
-    #endif
+        , inputBufferSize);
 }
 
 void Main::initThreads() {

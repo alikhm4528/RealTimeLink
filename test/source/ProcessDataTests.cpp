@@ -44,7 +44,6 @@ TEST_F(ProcessDataTests, InputDataSize20Interleaving) {
 
     ASSERT_EQ(20, outputBuffer->size());
 
-    int ind = 0;
     for(int i = 0; i < 5; i++){
         for(int j = 0; j < 4; j++) {
             ASSERT_EQ(j * 5 + i + 1, outputBuffer->front());
