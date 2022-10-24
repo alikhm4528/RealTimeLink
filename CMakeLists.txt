@@ -21,20 +21,8 @@ endif()
 
 add_compile_definitions(PREFIX="${PROJECT_SOURCE_DIR}/Database/")
 
-set(PROCESS_LIBS
-source/ProcessData.cpp
-source/Hamming.cpp
-source/Interleaving.cpp)
-
-set(FILE_HANDLE_LIBS
-source/FileHandler.cpp
-source/ReadChunk.cpp
-source/ReadFromFile.cpp
-source/WriteChunk.cpp
-source/WriteToFile.cpp)
-
-add_library(Process SHARED ${PROCESS_LIBS})
-add_library(FileHandle SHARED ${FILE_HANDLE_LIBS})
+add_subdirectory(Process)
+add_subdirectory(FileHandle)
 
 # Executables
 add_executable(${PROJECT_NAME} main.cpp source/Main.cpp)
